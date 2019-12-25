@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# Letztes Update: 21-Dez-19
+# Letztes Update: 25-Dez-19
 
 # alte Notizen nach neue Notizen kopieren
 # Repository dummy-notizenUbuntu-v03
@@ -85,7 +85,7 @@ work_files="work_files"
 grafiken="Grafiken"
 
 # projekt erstellen
-scripte="scripteBash"
+scripte="scripteBash_notizenUbuntu"
 tex_pandoc="tex-pandoc"
 tex="tex"
 pdf="pdf"

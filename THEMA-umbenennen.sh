@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# Letztes Update: 21-Dez-19
+# Letztes Update: 25-Dez-19
 # THEMA - Suchen und Ersetzen anpassen
 
 # Github Repository downloaden
@@ -19,7 +19,7 @@ clear
 # Repository
 #------------------------------------------------------
   # anpassen
-  THEMA="Arduino-Notiz"
+  THEMA="TCP_IP-Praxis-Notiz"
 
   #backup_USB="/media/jan/usb/backup/notizenUbuntu"    
   #backup_RPI4="smb://rpi4.local/nas/backup/notizenUbuntu" 
@@ -45,8 +45,8 @@ grafiken="Grafiken"
 
 alt="alt"
 neu="neu"
-work="/home/jan/tex"
-cd $work
+#work="/home/jan/tex"
+#cd $work
 
 # datum
 TIMESTAMP=$(date +"%d-%h-%Y")
@@ -55,18 +55,23 @@ echo ""
 
 # usereingabe
 REPOSITORY="dummy-notizenUbuntu-v03"
-read -p "Repository $REPOSITORY vorhanden? [j/n] " antwort
+read -p "Repository $REPOSITORY auf Github vorhanden? [j/n] " antwort
 if [ -z "$antwort" ]; then
   # String ist leer
   echo "Keine Eingabe"
 fi
 if [ "$antwort" == "j" ]; then
   echo "#---------------------"
-  cd $work/$neu
+  if [ ! -d $neu ]; then mkdir -p $neu; fi
+  cd $neu
   if [ -d $THEMA ]; then rm -rf $THEMA; fi
 
   # Backup Repository
-  git clone $repos_HD/$REPOSITORY.git $THEMA
+  #git clone $repos_HD/$REPOSITORY.git $THEMA
+  # Github Repository downloaden
+  REPOSITORY="dummy-notizenUbuntu-v03"
+  ADRESSE="git@github.com:ju1-eu"
+  git clone $ADRESSE/$REPOSITORY.git $THEMA
 
 
   echo "#---------------------"
@@ -76,7 +81,6 @@ if [ "$antwort" == "j" ]; then
     echo "Keine Eingabe"
   fi
   if [ "$antwort" == "j" ]; then
-    cd $work/$neu
     echo "#---------------------"
     # suchen und ersetzen
     # anpassen
@@ -104,7 +108,7 @@ if [ "$antwort" == "j" ]; then
     echo "#---------------------"
 
     # git init
-    cd $work/$neu/$THEMA
+    cd $THEMA
 		rm -rf .git
 		git init
 		git add .
@@ -137,15 +141,15 @@ if [ -z "$antwort" ]; then
 fi
 if [ "$antwort" == "j" ]; then
   # Kopie
-  cd $work
+  cd ../..
   # Option: -u	überspringt Dateien, die im Ziel neuer sind als in der Quelle
-  rsync -a $work/$alt/$THEMA/$code/ $work/$neu/$THEMA/$code/
-  rsync -a $work/$alt/$THEMA/$img/ $work/$neu/$THEMA/$img/
-  rsync -a $work/$alt/$THEMA/$md/ $work/$neu/$THEMA/$md/
-  rsync -a $work/$alt/$THEMA/$tex/ $work/$neu/$THEMA/$tex/
-  rsync -a $work/$alt/$THEMA/$work_files/ $work/$neu/$THEMA/$work_files/
-  rsync -a $work/$alt/$THEMA/$grafiken/ $work/$neu/$THEMA/$grafiken/
-  rsync -a $work/$alt/$THEMA/$tabellen/ $work/$neu/$THEMA/$tabellen/
+  rsync -a ./$alt/$THEMA/$code/ ./$neu/$THEMA/$code/
+  rsync -a ./$alt/$THEMA/$img/ ./$neu/$THEMA/$img/
+  rsync -a ./$alt/$THEMA/$md/ ./$neu/$THEMA/$md/
+  rsync -a ./$alt/$THEMA/$tex/ ./$neu/$THEMA/$tex/
+  rsync -a ./$alt/$THEMA/$work_files/ ./$neu/$THEMA/$work_files/
+  rsync -a ./$alt/$THEMA/$grafiken/ ./$neu/$THEMA/$grafiken/
+  rsync -a ./$alt/$THEMA/$tabellen/ ./$neu/$THEMA/$tabellen/
 else
   echo "Ende"
 fi
@@ -159,10 +163,10 @@ $ cd $neu/$THEMA
 scripte/sed.sh
   - codelanguage:    HTML5, Python, Bash, C, C++, TeX
   - CMS Server Pfad: https://www.ju1.eu/#
-  - Bildformat:      pdf, svg, png, jpg
+  - Bildformat:      pdf, svg, png, jpg, webp
 
 projekt.sh
-  - Backupverzeichnis
+  - Backupverzeichnis prüfen
 
 content/metadata.tex
   - Datum, Titel, Autor

@@ -59,7 +59,6 @@ Git Befehle
   git remote -v
   git push --all backupHD # sichern
   git push --all backupUSB
-  git push --all backupRPI4
 
   # Branch erstellen
   git checkout -b feature/a1
