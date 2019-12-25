@@ -1,6 +1,8 @@
 #!/bin/bash -e
 # Letztes Update: 25-Dez-19
 # THEMA - Suchen und Ersetzen anpassen
+# Erstellt Ordner für Notizen: Thema-Notiz
+# Erstellt Backup Repository
 
 # Github Repository downloaden
 #REPOSITORY="dummy-notizenUbuntu-v03"
